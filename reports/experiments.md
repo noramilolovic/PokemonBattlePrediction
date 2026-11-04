@@ -15,8 +15,7 @@ random_state=42) unless noted otherwise. Rows below are appended by `experiments
 | 2026-10-30 | v3 team+timeline+species+types (1057 features) | rf | 0.6698 | 0.0076 |
 | 2026-10-30 | v3 team+timeline+species+types (1057 features) | hgb15 | 0.6770 | 0.0049 |
 | 2026-10-30 | v3 tuned HGB (1057 features) | hgb_tuned | 0.6771 | 0.0063 |
-| 2026-10-31 | `hgb_reg_extra`: regularized HGB, team+timeline+extra | 0.6863 | 0.688 |
-| 2026-11-03 | `ensemble4_extra`: HGB+HGB_reg+LR+RF, team+timeline+extra (394 features) | 0.6878 | 0.698 |
+
 
 ### V3 Hyperparameter Tuning
 
@@ -69,8 +68,12 @@ first 30 turns, not the model.
 
 | Date | Configuration (`make_submissions.py`) | CV | Public score |
 |---|---|---|---|
-| 2026-10-30 | HGB default, team (37) + timeline | 0.673 | 0.68066 |
-| 2026-10-31 | `ensemble2`: LR+HGB, team+timeline+matchup | 0.6793 | (fill in) |
+| 2026-10-30 | `hgb_v1`: HGB default, team+timeline | 0.673 | 0.68066 |
+| 2026-10-31 | `ensemble2`: LR+HGB, team+timeline+matchup | 0.6793 | – |
+| 2026-10-31 | `hgb_reg_extra`: regularized HGB, team+timeline+extra | 0.6863 | 0.688 |
 | 2026-11-03 | `ensemble3`: LR+HGB+ET, team+timeline+matchup+momentum | 0.6799 | 0.6880 |
-| (fill in) | `hgb_reg_extra`: regularized HGB, team+timeline+extra | (fill in) | (fill in) |
-| (fill in) | `ensemble4_extra`: HGB+HGB_reg+LR+RF, team+timeline+extra | (fill in) | (fill in) |
+| 2026-11-03 | `ensemble4_extra`: HGB+HGB_reg+LR+RF, team+timeline+extra (394 features) | 0.6878 | 0.698 |
+
+CV for the two `extra` configurations: 5-fold, single run, seed 42 (`experiments/ensemble_tune.py`).
+The other CV values come from repeated 5-fold (3 repeats), so the two protocols are not strictly comparable.
+Public score = Kaggle public leaderboard.

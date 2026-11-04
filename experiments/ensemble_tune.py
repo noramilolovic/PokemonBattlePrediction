@@ -49,7 +49,7 @@ _nums = [a for a in sys.argv[1:] if a.isdigit()]
 SEED = int(_nums[0]) if _nums else 42
 LIMIT = 1500 if QUICK else None
 RF_TREES = 50 if QUICK else 500
-MODELS = ["hgb", "hgb_reg", "lr"]       # remove "rf" if it is too slow
+MODELS = ["hgb", "hgb_reg", "lr", "rf"]       # remove "rf" if it is too slow
 NEEDS_NO_NAN = {"rf", "lr"}                   # these two cannot take missing values
 N_FOLDS = 5
 

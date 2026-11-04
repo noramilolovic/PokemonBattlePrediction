@@ -1,21 +1,13 @@
 
-from pathlib import Path
 import pandas as pd
 
-CHART_PATH = Path(__file__).resolve().parent.parent / "data" / "type_chart_gen2.csv"
-
-chart = pd.read_csv(CHART_PATH)
-
-# Create a dictionary for looking up damage multipliers
-type_chart = {}
-
-for _, row in chart.iterrows():
-    attack = row["attacking_type"]
-    defense = row["defending_type"]
-    type_chart[(attack, defense)] = float(row["multiplier"])
+# Shared loader: finds the chart in data/ locally and in /kaggle/input on Kaggle
+from src.features_team import load_type_chart
 
 
 def effectiveness(attacking_type, defending_types):
+    # Dictionary for looking up damage multipliers (loaded once, then cached)
+    type_chart = load_type_chart()
     multiplier = 1.0
 
     for defending_type in defending_types:

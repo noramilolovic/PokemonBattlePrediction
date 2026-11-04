@@ -1,6 +1,6 @@
 """Sanity checks and paired CV for the momentum block and Extra Trees. Run from the repo root:
 
-    python check_momentum.py
+    python -m experiments.check_momentum
 
 A: ensemble (LogReg + HGB) on team + timeline + matchup  vs  + momentum
 B: on the full feature set, ensemble without vs with Extra Trees
@@ -29,10 +29,7 @@ from src.features_matchup import SpeciesTable, build_matchup_frame
 from src.features_momentum import build_momentum_frame
 from src.features_team import build_team_frame
 
-try:  # features_timeline.py may still live in the repo root
-    from src.features_timeline import build_timeline_frame
-except ImportError:
-    from features_timeline import build_timeline_frame
+from src.features_timeline import build_timeline_frame
 
 train, test = load_train(), load_test()
 species = SpeciesTable(train, test)

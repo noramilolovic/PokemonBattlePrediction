@@ -24,7 +24,7 @@ from src.features_team import build_team_frame
 from src.features_timeline import build_timeline_frame
 
 QUICK = "quick" in sys.argv
-MODEL_SET = ["hgb_reg"]                      # e.g. ["hgb", "hgb_reg", "lr"] for an ensemble
+MODEL_SET = ["hgb", "hgb_reg", "lr", "rf"]                      # e.g. ["hgb", "hgb_reg", "lr"] for an ensemble
 USE_EXTRA = True                             # False = old 272-column table
 NAME = "_".join(MODEL_SET) + ("_extra" if USE_EXTRA else "_base")
 OUT = f"submissions/{NAME}{'_quick' if QUICK else ''}.csv"

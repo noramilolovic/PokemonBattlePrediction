@@ -70,3 +70,5 @@ first 30 turns, not the model.
 | 2026-10-30 | HGB default, team (37) + timeline | 0.673 | 0.68066 |
 | 2026-10-31 | `ensemble2`: LR+HGB, team+timeline+matchup | 0.6793 | (fill in) |
 | 2026-11-03 | `ensemble3`: LR+HGB+ET, team+timeline+matchup+momentum | 0.6799 | 0.6880 |
+| (fill in) | `hgb_reg_extra`: regularized HGB, team+timeline+extra | (fill in) | (fill in) |
+| (fill in) | `ensemble4_extra`: HGB+HGB_reg+LR+RF, team+timeline+extra | (fill in) | (fill in) |

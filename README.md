@@ -38,6 +38,7 @@ src/
   features_species.py    one-hot species (v3)
   features_types.py      type effectiveness vs leads (v3)
   features_stall.py      stall potential after turn 30 (experiment, not used in submissions)
+  features_extra.py      per-species end hp + team target encoding (uses labels, built per fold)
   pipeline.py            build_X(battles, feature_set): named feature sets
   models.py              models for experiments and for the submissions
 make_submissions.py      one named configuration (feature set + model) per submission
@@ -68,6 +69,11 @@ Accuracy with repeated stratified 5-fold CV on the training set (details in `rep
 | `hgb_tuned_v3` | `v3` | tuned HistGB | 0.677 | |
 | `ensemble2` | `matchup` | LogReg + HistGB (soft voting) | 0.679 | |
 | `ensemble3` | `best` | LogReg + HistGB + Extra Trees (soft voting) | 0.680 | 0.688 |
+| `hgb_reg_extra` | `v1` + extra | regularized HistGB | | |
+| `ensemble4_extra` | `v1` + extra | HistGB + regularized HistGB + LogReg + RF (mean probability) | | |
+
+"extra" = per-species hp at turn 30 for the 60 most common species and a smoothed win rate
+of the exact P1 team (target encoding, out-of-fold on train). See `src/features_extra.py`.
 
 The timeline block carries almost all of the signal. Extra blocks (matchup, momentum, stall)
 and extra models give gains of 0.001–0.003, which are not statistically significant

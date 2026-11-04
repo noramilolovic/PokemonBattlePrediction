@@ -65,12 +65,12 @@ Accuracy with repeated stratified 5-fold CV on the training set (details in `rep
 | baseline | – | always majority class | 0.500 | |
 | team only | team | HistGB | 0.541 | |
 | timeline only | timeline | HistGB | 0.666 | |
-| `hgb_v1` | `v1` | HistGB | 0.673 | |
+| `hgb_v1` | `v1` | HistGB | 0.673 | 0.681 |
 | `hgb_tuned_v3` | `v3` | tuned HistGB | 0.677 | |
 | `ensemble2` | `matchup` | LogReg + HistGB (soft voting) | 0.679 | |
 | `ensemble3` | `best` | LogReg + HistGB + Extra Trees (soft voting) | 0.680 | 0.688 |
-| `hgb_reg_extra` | `v1` + extra | regularized HistGB | | |
-| `ensemble4_extra` | `v1` + extra | HistGB + regularized HistGB + LogReg + RF (mean probability) | | |
+| `hgb_reg_extra`   | `v1` + extra | regularized HistGB | 0.686 | 0.688 |
+| `ensemble4_extra` | `v1` + extra | HistGB + regularized HistGB + LogReg + RF (mean probability) | 0.688 | 0.698 |
 
 "extra" = per-species hp at turn 30 for the 60 most common species and a smoothed win rate
 of the exact P1 team (target encoding, out-of-fold on train). See `src/features_extra.py`.

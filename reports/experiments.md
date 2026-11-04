@@ -15,6 +15,8 @@ random_state=42) unless noted otherwise. Rows below are appended by `experiments
 | 2026-10-30 | v3 team+timeline+species+types (1057 features) | rf | 0.6698 | 0.0076 |
 | 2026-10-30 | v3 team+timeline+species+types (1057 features) | hgb15 | 0.6770 | 0.0049 |
 | 2026-10-30 | v3 tuned HGB (1057 features) | hgb_tuned | 0.6771 | 0.0063 |
+| 2026-10-31 | `hgb_reg_extra`: regularized HGB, team+timeline+extra | 0.6863 | 0.688 |
+| 2026-11-03 | `ensemble4_extra`: HGB+HGB_reg+LR+RF, team+timeline+extra (394 features) | 0.6878 | 0.698 |
 
 ### V3 Hyperparameter Tuning
 

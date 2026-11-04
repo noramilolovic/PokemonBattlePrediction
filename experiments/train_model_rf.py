@@ -1,7 +1,7 @@
 """Train a tree-based model (gradient boosting or random forest) on team + timeline features.
 
 Run from the repo root:
-    py train_model.py
+    python -m experiments.train_model_rf
 
 What it does
   1. builds the feature table (team block + timeline block, joined on battle_id);

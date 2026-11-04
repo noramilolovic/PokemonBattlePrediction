@@ -1,6 +1,6 @@
 """Sanity checks and paired CV for the matchup block. Run from the repo root:
 
-    python check_matchup.py
+    python -m experiments.check_matchup
 """
 
 import numpy as np
@@ -15,10 +15,7 @@ from src.data import get_target, load_test, load_train
 from src.features_matchup import SpeciesTable, build_matchup_frame
 from src.features_team import build_team_frame
 
-try:  # features_timeline.py may still live in the repo root
-    from src.features_timeline import build_timeline_frame
-except ImportError:
-    from features_timeline import build_timeline_frame
+from src.features_timeline import build_timeline_frame
 
 train, test = load_train(), load_test()
 species = SpeciesTable(train, test)

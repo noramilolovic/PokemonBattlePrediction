@@ -1,6 +1,7 @@
+import numpy as np
 from sklearn.pipeline import make_pipeline
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import FunctionTransformer, StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import (
     ExtraTreesClassifier,
@@ -8,6 +9,16 @@ from sklearn.ensemble import (
     RandomForestClassifier,
     VotingClassifier,
 )
+
+SEED = 42
+
+# Models that cannot take missing values: their input gets fillna(-1) (extra feature set)
+NEEDS_NO_NAN = {"rf", "lr_clip"}
+
+
+def _clip5(Z):
+    """Clip scaled values to [-5, 5] so a column that is 1 in only a few battles cannot explode."""
+    return np.clip(Z, -5, 5)
 
 
 def get_models():
@@ -72,5 +83,25 @@ def get_final_models():
 
         "ensemble_lr_hgb_et": VotingClassifier(
             [("lr", lr), ("hgb", hgb), ("et", et)], voting="soft"
+        ),
+
+        # models for the extra feature set (per-species end hp + team target encoding),
+        # same settings as make_model in ensemble_tune.py on the final-*-extra branches
+        "hgb": HistGradientBoostingClassifier(
+            learning_rate=0.05, max_iter=250, max_leaf_nodes=15,
+            min_samples_leaf=40, l2_regularization=1.0, random_state=SEED
+        ),
+        "hgb_reg": HistGradientBoostingClassifier(
+            learning_rate=0.03, max_iter=400, max_leaf_nodes=8,
+            min_samples_leaf=60, l2_regularization=3.0, random_state=SEED
+        ),
+        "rf": RandomForestClassifier(
+            n_estimators=500, min_samples_leaf=5, max_features="sqrt",
+            n_jobs=-1, random_state=SEED
+        ),
+        "lr_clip": make_pipeline(
+            StandardScaler(),
+            FunctionTransformer(_clip5),
+            LogisticRegression(C=0.05, max_iter=3000)
         ),
     }
